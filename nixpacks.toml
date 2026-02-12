@@ -1,0 +1,15 @@
+# Nixpacks config for Next.js + Prisma (v4)
+# Provide DATABASE_URL in your build environment so the homepage prerender can connect.
+# If unset, a dummy URL is used (build may then fail on prerender; set DATABASE_URL on your platform).
+
+[phases.setup]
+nixPkgs = ["...", "openssl"]
+
+[phases.build]
+cmds = ["export DATABASE_URL=\"${DATABASE_URL:-postgresql://localhost:5432/build}\" && npm run build"]
+
+[variables]
+NODE_ENV = "production"
+
+[start]
+cmd = "npm run start"
