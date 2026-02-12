@@ -6,7 +6,7 @@
 nixPkgs = ["...", "openssl"]
 
 [phases.build]
-cmds = ["export DATABASE_URL=\"${DATABASE_URL:-postgresql://localhost:5432/build}\" && npm run db:migrate && npm run build"]
+cmds = ["export DATABASE_URL=\"${DATABASE_URL:-postgresql://localhost:5432/build}\" && npx prisma migrate deploy && npm run build"]
 
 [variables]
 NODE_ENV = "production"
